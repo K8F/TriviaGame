@@ -1,0 +1,19 @@
+body {
+    background-image: url("/assets/images/skulls-background.jpg");
+}
+    
+    #wrapper {
+        background-color: darkslateblue;
+        text-align: center;
+        width: 800px;
+        height: 800px;
+        margin: auto;
+    }
+    
+    
+    #title {
+        font-family: 'Shadows Into Light', cursive;
+        font-weight: bold;
+        font-size: 26pt;
+        padding-top: 10px;
+    }
