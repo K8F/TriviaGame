@@ -35,9 +35,9 @@ var incorrect = 0;
 var unanswered = 0;
 
 //timer
-var timeLeft = 30;
+var timeLeft = 15;
 var timerOn = false;
-var timerID = setIntreval(countdown, 1000);
+var timerID = setInterval(countdown, 1000);
 
 //questions object
 var questions = [
@@ -76,17 +76,25 @@ unanswered=0;
 clearInterval(timerID);
 
 //show game section
+$('#game').show;
 
-//reset responses
+//reset results
+$('#results').html('');
 
 //show timer
-$('#timer').html('');
+$('#timer').text(timeLeft);
 
 //hide start button
 $('#start').hide();
 
+$('#remaining-time').show();
+
+//display first question
+    //function
 
 }
+
+
 
 //display timer
 $('#timer').text(timeLeft + " Seconds");

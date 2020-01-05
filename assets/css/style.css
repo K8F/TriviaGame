@@ -23,5 +23,13 @@ body {
         margin: auto;    
     }
 
+    #start {
+        width: 200px;
+        height: 75px;
+        font-weight: bold;
+        font-size: 20pt;
+        background-color: gray;
+    
+    }
 
 
