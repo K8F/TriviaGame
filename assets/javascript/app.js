@@ -41,34 +41,32 @@ var timerOn = false;
 var timerID = '';
 
 //questions object
-var questions = [
-    {    
-        question: "This is the first question?",
-        choices: ['1', '2', '3', '4'],
-        answer: '2',
+var trivia = {
+    questions: {
+        q1: "This is the first question?",
+        q2: "This is the second question?",
+        q3: "This is the third question?",
+        q4: "This is the fourth question?",
+        q5: "This is the fifth question?"
     },
-    {   question: "This is the second question?",
-        choices: ['1', '2', '3', '4'],
-        answer: '3'
-    }, 
-
-    {
-        question: "This is the third question?",
-        choices: ['1', '2', '3', '4'],
-        answer: '1'
-    },
-    {
-        question: "This is the fourth question?",
-        choices: ['1', '2', '3', '4'],
-        answers: '4',
+   
+    choices:{
+        q1: ['1', '2', '3', '4'],
+        q2: ['1', '2', '3', '4'],
+        q3: ['1', '2', '3', '4'],
+        q4: ['1', '2', '3', '4'],
+        q5: ['1', '2', '3', '4']
     },
 
-    {
-        question: "This is the fifth question?",
-        choices: ['1', '2', '3', '4'],
-        answer: '4'
+    answers: {
+        q1: '2',
+        q2: '4',
+        q3: '1',
+        q4: '1',
+        q5: '3'
     }
-]
+}
+    
 
 function startGame(){
 correct=0; 
@@ -92,15 +90,14 @@ $('#remaining-time').show();
 
 //display first question
     //function
-    showQuestion();
+    showQuestions();
 
+    
 }
-
 //loop through questions
 
-function showQuestion(){
+function showQuestions(){
     timeLeft= 15;
-    $('#timer').removeClass('times-up');
     $('#timer').text(timeLeft);
 
     //prevent timer from speeding up
@@ -108,10 +105,19 @@ function showQuestion(){
         timerID=setInterval(countdown,1000);
     }
 
+    //index questions
+    var questionAsked=Object.values(trivia.questions)[currentSet];
+    $('#question').text(questionAsked);
 
+    for (var i = 0; i < trivia.questions.length; i++){
+        $('#question').prepend('')
+    }
+
+
+//function for timer
 function countdown(){
     // if timer still has time left and there are still questions left to ask
-    if(timeLeft > -1 && currentSet < Object.keys(questions).length){
+    if(timeLeft > -1 && currentSet < Object.keys(trivia.questions).length){
       $('#timer').text(timeLeft);
       timeLeft--;
     
@@ -119,13 +125,6 @@ function countdown(){
 
         //need if statement for timer running completely out. 
     }
-
-
-
-//show questions
-
-var nextQuestion = function(){
-    //30 seconds for each question
 
     
 }
