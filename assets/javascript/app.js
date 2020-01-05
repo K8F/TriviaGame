@@ -27,7 +27,7 @@ $(document).ready(function(){
 $("#remaining-time").hide();
 $("#start").on('click', startGame);
 })
-$("")
+
 
 //object array starts at 0
 var currentSet=0;
@@ -69,7 +69,6 @@ var trivia = {
     }
 }
     
-
 function startGame(){
 correct=0; 
 incorrect=0;
@@ -113,9 +112,9 @@ function showQuestions(){
 
     //possible answers
     var questionChoices = Object.values(trivia.choices)[currentSet];
-    $.each(questionChoices, function(indexChoices){
-        $('#choices').append($("<button>"+indexChoices+"</button"));
-    
+    $.each(questionChoices, function(index, choiceList){
+        $('#choices').append($("<button></button").html(choiceList));
+        
     })
 //function for timer
 function countdown(){
@@ -124,13 +123,13 @@ function countdown(){
       $('#timer').text(timeLeft);
       timeLeft--;
         }
-        //need if statement for timer running completely out. 
+    
+    
+    //need if statement for timer running completely out. 
 
     else if (timeLeft===-1){
         unanswered++;
-        clearInterval(timerID);
         
-
    }    
 
    console.log(unanswered)
