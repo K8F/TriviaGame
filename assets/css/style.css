@@ -1,19 +1,27 @@
 body {
-    background-image: url("/assets/images/skulls-background.jpg");
+    background-image: url("../images2/skulls-background.png");
 }
     
     #wrapper {
         background-color: darkslateblue;
         text-align: center;
         width: 800px;
-        height: 800px;
+        height: 600px;
         margin: auto;
     }
     
     
     #title {
-        font-family: 'Shadows Into Light', cursive;
-        font-weight: bold;
-        font-size: 26pt;
+        font-family: 'Creepster', cursive;
+        font-size: 40pt;
+        font-weight: lighter;
         padding-top: 10px;
+        color:maroon;
     }
+
+    #timer {
+        margin: auto;    
+    }
+
+
+
