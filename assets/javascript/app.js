@@ -29,11 +29,13 @@ $("#start").on('click', startGame);
 })
 $("")
 
+//object array starts at 0
+var currentSet=0;
+
 //score
 var correct = 0; 
 var incorrect = 0; 
 var unanswered = 0;
-var currentSet=0;
 
 //timer
 var timeLeft = 15;
@@ -109,44 +111,36 @@ function showQuestions(){
     var questionAsked=Object.values(trivia.questions)[currentSet];
     $('#question').text(questionAsked);
 
-    for (var i = 0; i < trivia.questions.length; i++){
-        $('#question').prepend('')
-    }
-
-
+    //possible answers
+    var questionChoices = Object.values(trivia.choices)[currentSet];
+    $.each(questionChoices, function(indexChoices){
+        $('#choices').append($("<button>"+indexChoices+"</button"));
+    
+    })
 //function for timer
 function countdown(){
     // if timer still has time left and there are still questions left to ask
     if(timeLeft > -1 && currentSet < Object.keys(trivia.questions).length){
       $('#timer').text(timeLeft);
       timeLeft--;
-    
         }
-
         //need if statement for timer running completely out. 
+
+    else if (timeLeft===-1){
+        unanswered++;
+        clearInterval(timerID);
+        
+
+   }    
+
+   console.log(unanswered)
+
     }
+
 
     
 }
    
 
-
-
-
-
-
-
-// for (var i=0; i<questions.length; i++) {
-    //     var response = window.prompt(questions[i].choices);
-    //     if(response == questions[i].answer){
-    //         correct++;
-    //         //change this later so that new screen appears with answer & photo
-    //     } else{
-    //         incorrect++;
-    //         //change this later sot hat new screen appears with answer & photo
-    //     }
-
-    //     //if statement if timer runs out
-    // }
 
 
