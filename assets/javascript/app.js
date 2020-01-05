@@ -33,11 +33,12 @@ $("")
 var correct = 0; 
 var incorrect = 0; 
 var unanswered = 0;
+var currentSet=0;
 
 //timer
 var timeLeft = 15;
 var timerOn = false;
-var timerID = setInterval(countdown, 1000);
+var timerID = '';
 
 //questions object
 var questions = [
@@ -91,26 +92,34 @@ $('#remaining-time').show();
 
 //display first question
     //function
+    showQuestion();
 
 }
 
+//loop through questions
 
+function showQuestion(){
+    timeLeft= 15;
+    $('#timer').removeClass('times-up');
+    $('#timer').text(timeLeft);
 
-//display timer
-$('#timer').text(timeLeft + " Seconds");
-
-function countdown(){
-    if (timeLeft == 0) {
-        clearTimeout(timerID);
-    } else {
-        
-
+    //prevent timer from speeding up
+    if(!timerOn){
+        timerID=setInterval(countdown,1000);
     }
 
 
+function countdown(){
+    // if timer still has time left and there are still questions left to ask
+    if(timeLeft > -1 && currentSet < Object.keys(questions).length){
+      $('#timer').text(timeLeft);
+      timeLeft--;
+    
+        }
 
+        //need if statement for timer running completely out. 
+    }
 
-//countdown timer
 
 
 //show questions
@@ -142,4 +151,3 @@ var nextQuestion = function(){
     // }
 
 
-}
