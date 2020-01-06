@@ -24,13 +24,15 @@ console.log("correct file")
 
 $(document).ready(function(){
 //event listeners
-$("#remaining-time").hide();
+//when user clicks, game starts
 $("#start").on('click', startGame);
+$("#remaining-time").hide();
+$(document).on('click' , '#choices', guessChecker);
 })
 
 
-//object array starts at 0
-var currentSet=0;
+//current question starts at 0
+var currentQuestion=0;
 
 //score
 var correct = 0; 
@@ -69,7 +71,10 @@ var trivia = {
     }
 }
     
+
 function startGame(){
+//reset game
+currentQuestion=0;
 correct=0; 
 incorrect=0;
 unanswered=0;
@@ -81,65 +86,108 @@ $('#game').show;
 //reset results
 $('#results').html('');
 
-//show timer
-$('#timer').text(timeLeft);
 
 //hide start button
 $('#start').hide();
 
+//show timer
 $('#remaining-time').show();
+$('#timer').text(timeLeft);
 
 //display first question
     //function
     showQuestions();
-
     
 }
 //loop through questions
 
 function showQuestions(){
-    timeLeft= 15;
+    //display timer
+    timeLeft= 5;
     $('#timer').text(timeLeft);
 
     //prevent timer from speeding up
     if(!timerOn){
         timerID=setInterval(countdown,1000);
-    }
+    };
 
-    //index questions
-    var questionAsked=Object.values(trivia.questions)[currentSet];
-    $('#question').text(questionAsked);
+    //append questions
+    var ask=Object.values(trivia.questions)[currentQuestion];
+    $('#question').text(ask);
 
-    //possible answers
-    var questionChoices = Object.values(trivia.choices)[currentSet];
+    //append possible answers for that question
+    var questionChoices = Object.values(trivia.choices)[currentQuestion];
     $.each(questionChoices, function(index, choiceList){
-        $('#choices').append($("<button></button").html(choiceList));
-        
+        $('#choices').append($("<button></button>").html(choiceList));
     })
-//function for timer
+}
+//timer countdown function
 function countdown(){
     // if timer still has time left and there are still questions left to ask
-    if(timeLeft > -1 && currentSet < Object.keys(trivia.questions).length){
+    if(timeLeft > -1 && currentQuestion < Object.keys(trivia.questions).length){
       $('#timer').text(timeLeft);
       timeLeft--;
         }
-    
-    
     //need if statement for timer running completely out. 
-
     else if (timeLeft===-1){
         unanswered++;
-        
-   }    
+        console.log(unanswered);
+        result= false;
+        clearInterval(timerID);
+        resultID=setTimeout(guessResult, 1000);
+        $('#results').html('<h3>Out of time! The answer was ' + Object.values(trivia.answers)[currentQuestion] + '</h3>');
+   }   
 
-   console.log(unanswered)
-
-    }
-
-
+   else if (currentQuestion === Object.keys(trivia.questions).length) {
     
-}
+    //hide game section
+   $('#game').hide();
+    
+    $('#results')
+    .html('<h3>Thank you for playing!</h3>'+
+    '<p>Correct: '+ correct +'</p>'+
+    '<p>Incorrect: '+ incorrect +'</p>'+
+    '<p>Unaswered: '+ unanswered +'</p>'+
+    '<p>Please play again!</p>');
+
+     
+
+   $('#start').show();
+
+
+   }}
+
    
+console.log(Object.keys(trivia.answers));
 
 
 
+
+function guessChecker(){
+   var resultID;
+   var currentAnswer=Object.values(trivia.answers)[currentQuestion];
+   
+   if($(this).html()=== currentAnswer){
+       correct++;
+       clearInterval(timerID);
+       resultID = setTimeout(guessResult,1000);
+       $('#results').html('<h3>Correct Answer!</h3>');
+   }
+
+   else{
+       trivia.incorrect++;
+       clearInterval(timerID);
+       resultID=setTimeout(timerID.guessResult, 1000);
+       $('#results').html('<h3>Better luck nedt time!' + currentAnswer +'</h3>');
+   }
+}
+
+   function guessResult(){
+       currentQuestion++;
+       $('#choices').remove();
+       $('#results h3').remove();
+
+       showQuestions();
+   }
+
+console.log(unanswered);
