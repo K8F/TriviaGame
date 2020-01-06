@@ -23,14 +23,16 @@ body {
         margin: auto;    
     }
 
-    button {
+    #start {
         width: 200px;
         height: 50px;
         font-weight: bold;
         font-size: 20pt;
         background-color: gray;
         display:block;
-margin:auto    
+        margin:auto;  
     }
+
+
 
 
