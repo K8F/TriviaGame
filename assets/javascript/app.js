@@ -148,11 +148,11 @@ function countdown(){
     
     //shows end stats
     $('#results')
-    .html('<h3>Let/s see how you did...</h3>'+
+    .html('<h3>Here are your results:</h3>'+
     '<p>Correct: '+ correct +'</p>'+
     '<p>Incorrect: '+ incorrect +'</p>'+
     '<p>Unaswered: '+ unanswered +'</p>'+
-    '<p>Please play again!</p>');
+    '<p>Click start to play again.</p>');
 
     //hide game section
    $('#game').hide();
