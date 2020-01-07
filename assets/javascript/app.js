@@ -128,6 +128,8 @@ function startGame(){
 
 //timer countdown function
 function countdown(){
+    var correctAnswer=Object.values(trivia.answers)[trivia.currentQuestion];
+
     // if timer still has time left and there are still questions left to ask
     if(timeLeft > -1 && trivia.currentQuestion < Object.keys(trivia.questions).length){
       $('#timer').text(timeLeft);
@@ -141,7 +143,8 @@ function countdown(){
        
         clearInterval(timerID);
         resultID=setTimeout(resetQuestion, 1000);
-        $('#results').html('<h3>Out of time! The answer was: ' + Object.values(trivia.answers)[trivia.currentQuestion] + '</h3>');
+        var answerString=Object.values(trivia.choices)[trivia.currentQuestion][correctAnswer];
+        $('#results').html('<h3>Out of time! The answer was: ' + answerString + '</h3>');
    }   
 
    else if(trivia.currentQuestion === Object.keys(trivia.questions).length){
